@@ -69,6 +69,13 @@ fn create_platform_command(command: &str, args: &Vec<String>, settings: &Setting
         result
     };
 
+    // set env based on command line settings
+    if !settings.get::<CmdLineSettings>().proxy.is_empty() {
+        let proxy = settings.get::<CmdLineSettings>().proxy;
+        result.env("http_proxy", &proxy);
+        result.env("https_proxy", &proxy);
+    }
+
     result.creation_flags(windows::Win32::System::Threading::CREATE_NO_WINDOW.0);
     result
 }

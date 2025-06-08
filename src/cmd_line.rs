@@ -148,6 +148,11 @@ pub struct CmdLineSettings {
     #[cfg(any(target_os = "windows", target_os = "macos"))]
     #[arg(long = "opengl", env = "NEOVIDE_OPENGL", action = ArgAction::SetTrue, value_parser = FalseyValueParser::new())]
     pub opengl: bool,
+
+    /// Specify a proxy for Neovim through cmdline (Windows only)
+    #[cfg(target_os = "windows")]
+    #[arg(long = "proxy", default_value = "")]
+    pub proxy: String,
 }
 
 // geometry, size and maximized are mutually exclusive
